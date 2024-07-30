@@ -23,14 +23,14 @@ export default function SessisonProvider() {
     console.log("Session", userSesssion);
 
     if (userSesssion.session) {
-      //   const { data } = await supabase
-      //     .from("users")
-      //     .select("*")
-      //     .eq("id", userSesssion.session?.user.id)
-      //     .single();
+      const { data } = await supabase
+        .from("users")
+        .select("*")
+        .eq("id", userSesssion.session?.user.id)
+        .single();
 
-      //   console.log("User", data);
-
+      console.log("User", data);
+      // setUser(data);
       setUser(userSesssion.session?.user.user_metadata);
     }
   };

@@ -1,11 +1,14 @@
-"use client";
 import Link from "next/link";
-import { useUser } from "@/lib/store/user";
 import LoginForm from "./LoginForm";
 import Profile from "./Profile";
+import { createSupabaseServerClient } from "@/lib/supabase";
 
-export default function Navbar() {
-  const { user } = useUser();
+export default async function Navbar() {
+  const supabase = await createSupabaseServerClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   return (
     <nav className="flex items-center justify-between">

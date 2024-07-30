@@ -1,4 +1,4 @@
-import React from "react";
+"use client";
 import {
   Popover,
   PopoverContent,
@@ -17,11 +17,11 @@ export default function Profile() {
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   );
-  const { user, setUser } = useUser();
+  const { user } = useUser();
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    setUser(null);
+    window.location.reload();
   };
   const isAdmin = user?.role === "admin";
   const isSub = user?.stripe_customer_id;
@@ -37,11 +37,12 @@ export default function Profile() {
           className="rounded-full ring-2 ring-green-500"
         />
       </PopoverTrigger>
-      <PopoverContent className="space-y-3 divide-y p-2" side="bottom">
+      <PopoverContent className="flex flex-col gap-3 p-2" side="bottom">
         <div className="px-4">
-          <p className="text-sm">{user?.name}</p>
+          <p className="text-sm">{user?.user_name}</p>
           <p className="text-sm text-gray-500">{user?.email}</p>
         </div>
+
         {!isAdmin && isSub && (
           <ManageBill customerId={user?.stripe_customer_id!} />
         )}
@@ -57,13 +58,16 @@ export default function Profile() {
           </Link>
         )}
 
-        <Button
-          variant="ghost"
-          className="w-full flex justify-between items-center"
-          onClick={handleLogout}
-        >
-          Log out <LockOpen1Icon />
-        </Button>
+        <div>
+          <hr className="w-[90%] mx-auto" />
+          <Button
+            variant="ghost"
+            className="w-full flex justify-between items-center"
+            onClick={handleLogout}
+          >
+            Log out <LockOpen1Icon />
+          </Button>
+        </div>
       </PopoverContent>
     </Popover>
   );

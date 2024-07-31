@@ -6,6 +6,7 @@ import Navbar from "@/components/navbar/Navbar";
 import { Session } from "inspector";
 import SessisonProvider from "@/components/session-provider";
 import { Toaster } from "@/components/ui/toaster";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,6 +32,7 @@ export default function RootLayout({
           <main className="mx-auto max-w-7xl space-y-5 p-10">
             <Navbar />
             {children}
+            <Footer />
           </main>
         </ThemeProvider>
         <Toaster />

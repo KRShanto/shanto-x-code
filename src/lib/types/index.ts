@@ -38,7 +38,7 @@ export type IBlogForm = {
 
 export type Iuser = {
   created_at: string;
-  display_name: string;
+  name: string;
   email: string;
   id: string;
   image_url: string;

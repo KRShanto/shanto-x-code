@@ -9,7 +9,7 @@ export default function SessisonProvider() {
 
   const supabase = createBrowserClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
   );
 
   useEffect(() => {
@@ -29,9 +29,7 @@ export default function SessisonProvider() {
         .eq("id", userSesssion.session?.user.id)
         .single();
 
-      console.log("User", data);
-      // setUser(data);
-      setUser(userSesssion.session?.user.user_metadata);
+      setUser(data as any);
     }
   };
 

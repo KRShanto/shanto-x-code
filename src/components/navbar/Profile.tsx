@@ -15,7 +15,7 @@ import ManageBill from "@/components/stripe/Manage";
 export default function Profile() {
   const supabase = createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
   );
   const { user } = useUser();
 
@@ -30,8 +30,8 @@ export default function Profile() {
     <Popover>
       <PopoverTrigger>
         <Image
-          src={user?.avatar_url!}
-          alt={user?.display_name!}
+          src={user?.image_url!}
+          alt={user?.name!}
           width={50}
           height={50}
           className="rounded-full ring-2 ring-green-500"
@@ -39,7 +39,7 @@ export default function Profile() {
       </PopoverTrigger>
       <PopoverContent className="flex flex-col gap-3 p-2" side="bottom">
         <div className="px-4">
-          <p className="text-sm">{user?.user_name}</p>
+          <p className="text-sm">{user?.name}</p>
           <p className="text-sm text-gray-500">{user?.email}</p>
         </div>
 
@@ -51,7 +51,7 @@ export default function Profile() {
           <Link href="/dashboard">
             <Button
               variant="ghost"
-              className="w-full flex justify-between items-center"
+              className="flex w-full items-center justify-between"
             >
               Dashboard <DashboardIcon />
             </Button>
@@ -59,10 +59,10 @@ export default function Profile() {
         )}
 
         <div>
-          <hr className="w-[90%] mx-auto" />
+          <hr className="mx-auto w-[90%]" />
           <Button
             variant="ghost"
-            className="w-full flex justify-between items-center"
+            className="flex w-full items-center justify-between"
             onClick={handleLogout}
           >
             Log out <LockOpen1Icon />

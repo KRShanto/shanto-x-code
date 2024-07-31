@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar/Navbar";
 import { Session } from "inspector";
 import SessisonProvider from "@/components/session-provider";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,11 +28,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="max-w-7xl mx-auto p-10 space-y-5">
+          <main className="mx-auto max-w-7xl space-y-5 p-10">
             <Navbar />
             {children}
           </main>
         </ThemeProvider>
+        <Toaster />
         <SessisonProvider />
       </body>
     </html>

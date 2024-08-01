@@ -10,6 +10,7 @@ const DASHBOARD = "/dashboard/blog";
 export async function createBlog(data: {
   content: string;
   title: string;
+  slug: string;
   image_url: string;
   is_premium: boolean;
   is_published: boolean;

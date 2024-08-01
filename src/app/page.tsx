@@ -16,7 +16,7 @@ export default async function Home() {
         return (
           <Link
             href={"/blog/" + blog.id}
-            className="dark:bg-graident-dark w-full cursor-pointer space-y-5 rounded-md border p-5 ring-green-500 transition-all hover:ring-2 first:md:col-span-3 first:lg:col-span-2"
+            className="dark:bg-graident-dark w-full cursor-pointer space-y-5 rounded-md border p-5 ring-slate-700 transition-all hover:ring-1 first:md:col-span-3 first:lg:col-span-2"
             key={index}
           >
             <div className="relative h-72 w-full sm:w-full md:h-64 xl:h-96">

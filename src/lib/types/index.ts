@@ -14,6 +14,7 @@ export type IBlogDetials = {
   image_url: string;
   is_premium: boolean;
   is_published: boolean;
+  slug: string;
   title: string;
   blog_content: {
     blog_id: string;

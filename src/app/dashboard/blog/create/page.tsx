@@ -2,7 +2,6 @@
 import React from "react";
 
 import { toast } from "@/components/ui/use-toast";
-import { defaultCreateBlog } from "@/lib/data";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import BlogForm from "../components/BlogForm";
 import { createBlog } from "../../../../actions/blog";
@@ -34,7 +33,5 @@ export default function CreateForm() {
     }
   };
 
-  return (
-    <BlogForm onHandleSubmit={onHandleSubmit} defaultBlog={defaultCreateBlog} />
-  );
+  return <BlogForm onHandleSubmit={onHandleSubmit} />;
 }

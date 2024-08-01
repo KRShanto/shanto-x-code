@@ -27,7 +27,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <h1 className="text-sm">&copy; 2023 Chensokheng.All right reserved</h1>
+        <h1 className="text-sm">&copy; 2024 KR Shanto. right reserved</h1>
       </div>
     </footer>
   );

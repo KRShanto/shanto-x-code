@@ -3,7 +3,10 @@ import * as z from "zod";
 export const BlogFormSchema = z
   .object({
     title: z.string().min(10, {
-      message: "title is too short",
+      message: "Title is too short",
+    }),
+    slug: z.string().min(5, {
+      message: "Slug is too short",
     }),
     content: z.string().min(10, {
       message: "Content is too short",
@@ -27,7 +30,7 @@ export const BlogFormSchema = z
     {
       message: "Currently we are supporting only the image from unsplash",
       path: ["image_url"],
-    }
+    },
   );
 
 export type BlogFormSchemaType = z.infer<typeof BlogFormSchema>;

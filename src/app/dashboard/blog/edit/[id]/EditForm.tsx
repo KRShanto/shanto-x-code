@@ -8,14 +8,14 @@ import { IBlogDetials } from "@/lib/types";
 import { BlogFormSchemaType } from "../../schema";
 import { updateBlogDetail } from "@/actions/blog";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function EditForm({ blog }: { blog: IBlogDetials }) {
   const router = useRouter();
 
   const onHandleSubmit = async (data: BlogFormSchemaType) => {
     const result = JSON.parse(
-      await updateBlogDetail(blog?.id!, data)
+      await updateBlogDetail(blog?.id!, data),
     ) as PostgrestSingleResponse<null>;
     if (result.error) {
       toast({

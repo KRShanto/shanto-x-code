@@ -23,27 +23,33 @@ import {
   RocketIcon,
   StarIcon,
 } from "@radix-ui/react-icons";
-import { ReactNode, useState, useTransition } from "react";
+import { ReactNode, useEffect, useState, useTransition } from "react";
 import { IBlogDetials, IBlogForm } from "@/lib/types";
 import { Switch } from "@/components/ui/switch";
 import { BsSave } from "react-icons/bs";
 import { BlogFormSchema, BlogFormSchemaType } from "../schema";
 
 export default function BlogForm({
-  onHandleSubmit,
   defaultBlog,
+  onHandleSubmit,
 }: {
-  defaultBlog: IBlogDetials;
+  defaultBlog?: IBlogDetials;
   onHandleSubmit: (data: BlogFormSchemaType) => void;
 }) {
   const [isPending, startTransition] = useTransition();
   const [isPreview, setPreivew] = useState(false);
+  const [host, setHost] = useState("");
+
+  useEffect(() => {
+    setHost(window.location.host);
+  }, []);
 
   const form = useForm<z.infer<typeof BlogFormSchema>>({
     mode: "all",
     resolver: zodResolver(BlogFormSchema),
     defaultValues: {
       title: defaultBlog?.title,
+      slug: defaultBlog?.slug,
       content: defaultBlog?.blog_content.content,
       image_url: defaultBlog?.image_url,
       is_premium: defaultBlog?.is_premium,
@@ -161,7 +167,7 @@ export default function BlogForm({
                       {...field}
                       autoFocus
                       className={cn(
-                        "border-none text-lg font-medium leading-relaxed ring-green-500 focus:ring-1",
+                        "border-none text-lg font-medium",
                         isPreview ? "w-0 p-0" : "w-full lg:w-1/2",
                       )}
                     />
@@ -187,6 +193,55 @@ export default function BlogForm({
                     <FormMessage />
                   </div>
                 )}
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="slug"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <>
+                  <div
+                    className={cn(
+                      "flex w-full gap-2 break-words p-2",
+                      isPreview ? "divide-x-0" : "divide-x",
+                    )}
+                  >
+                    <Input
+                      placeholder="Blog slug"
+                      {...field}
+                      autoFocus
+                      className={cn(
+                        "border-none text-lg",
+                        isPreview ? "w-0 p-0" : "w-full lg:w-1/2",
+                      )}
+                    />
+                    <div
+                      className={cn(
+                        "lg:px-10",
+                        isPreview
+                          ? "mx-auto w-full lg:w-4/5"
+                          : "hidden w-1/2 lg:block",
+                      )}
+                    >
+                      <h1 className="text-lg dark:text-gray-400">
+                        {form.getValues().slug
+                          ? `https://${host}/blog/${form.getValues().slug}`
+                          : "Undefined slug"}
+                      </h1>
+                    </div>
+                  </div>
+                </>
+              </FormControl>
+
+              {form.getFieldState("slug").invalid && form.getValues().slug && (
+                <div className="px-2">
+                  <FormMessage />
+                </div>
+              )}
             </FormItem>
           )}
         />

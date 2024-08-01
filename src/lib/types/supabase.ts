@@ -16,6 +16,7 @@ export interface Database {
           image_url: string;
           is_premium: boolean;
           is_published: boolean;
+          slug: string;
           title: string;
         };
         Insert: {
@@ -24,6 +25,7 @@ export interface Database {
           image_url: string;
           is_premium?: boolean;
           is_published?: boolean;
+          slug: string;
           title: string;
         };
         Update: {
@@ -32,6 +34,7 @@ export interface Database {
           image_url?: string;
           is_premium?: boolean;
           is_published?: boolean;
+          slug?: string;
           title?: string;
         };
         Relationships: [];
@@ -59,7 +62,7 @@ export interface Database {
             isOneToOne: true;
             referencedRelation: "blog";
             referencedColumns: ["id"];
-          }
+          },
         ];
       };
       users: {

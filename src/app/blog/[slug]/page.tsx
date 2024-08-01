@@ -5,17 +5,19 @@ import Content from "./Content";
 
 export async function generateStaticParams() {
   const { data: blogs } = await fetch(
-    process.env.SITE_URL + "/api/blog?id=*",
+    process.env.SITE_URL + "/api/blog?slug=*",
   ).then((res) => res.json());
 
-  return blogs.map((blog: { id: number }) => ({
-    params: { id: blog.id.toString() },
-  }));
+  return blogs;
 }
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const { data: blog } = (await fetch(
-    process.env.SITE_URL + "/api/blog?id=" + params.id,
+    process.env.SITE_URL + "/api/blog?slug=" + params.slug,
   ).then((res) => res.json())) as { data: IBlog };
 
   return {
@@ -27,9 +29,9 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   };
 }
 
-export default async function page({ params }: { params: { id: string } }) {
+export default async function page({ params }: { params: { slug: string } }) {
   const { data: blog } = (await fetch(
-    process.env.SITE_URL + "/api/blog?id=" + params.id,
+    process.env.SITE_URL + "/api/blog?slug=" + params.slug,
   ).then((res) => res.json())) as { data: IBlog };
 
   if (!blog?.id) {
@@ -55,7 +57,7 @@ export default async function page({ params }: { params: { id: string } }) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
-      <Content blogId={params.id} />
+      <Content blogId={blog.id} />
     </div>
   );
 }

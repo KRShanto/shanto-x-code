@@ -9,16 +9,16 @@ export async function GET(request: Request) {
 
   const { searchParams } = new URL(request.url);
 
-  const id = searchParams.get("id");
+  const slug = searchParams.get("slug");
 
-  if (id === "*") {
-    const result = await supabase.from("blog").select("id");
+  if (slug === "*") {
+    const result = await supabase.from("blog").select("slug");
     return Response.json({ ...result });
-  } else if (id) {
+  } else if (slug) {
     const result = await supabase
       .from("blog")
       .select("*")
-      .eq("id", id)
+      .eq("slug", slug)
       .single();
     return Response.json({ ...result });
   }

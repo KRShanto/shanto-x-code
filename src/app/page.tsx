@@ -15,7 +15,7 @@ export default async function Home() {
       {blogs.map((blog, index) => {
         return (
           <Link
-            href={"/blog/" + blog.id}
+            href={"/blog/" + blog.slug}
             className="dark:bg-graident-dark w-full cursor-pointer space-y-5 rounded-md border p-5 ring-slate-700 transition-all hover:ring-1 first:md:col-span-3 first:lg:col-span-2"
             key={index}
           >
